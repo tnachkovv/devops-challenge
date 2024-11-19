@@ -20,12 +20,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.5.0
-
       - name: Authenticate to Azure
         run: |
           echo "ARM_CLIENT_ID=${{ secrets.ARM_CLIENT_ID }}" >> $GITHUB_ENV
@@ -58,7 +56,7 @@ jobs:
               terraform plan -target=azurerm_service_plan.main -out=tfplan
               ;;
             function_app)
-              terraform plan -target=azurerm_function_app.main -out=tfplan
+              terraform plan -target=azurerm_linux_function_app.main -out=tfplan
               ;;
           esac
         working-directory: ./ops/terraform

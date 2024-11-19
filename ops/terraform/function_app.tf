@@ -23,8 +23,17 @@ resource "azurerm_linux_function_app" "main" {
   app_settings = {
     WEBSITE_MOUNT_ENABLED = "1",
   }
+
+  
   depends_on = [
     azurerm_storage_account.main,
     azurerm_service_plan.main
   ]
+}
+resource "null_resource" "delay_after_function_app" {
+  provisioner "local-exec" {
+    command = "sleep 60"
+  }
+
+  depends_on = [azurerm_linux_function_app.main]
 }

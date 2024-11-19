@@ -9,3 +9,11 @@ resource "azurerm_storage_account" "main" {
     azurerm_resource_group.main
   ]
 }
+
+resource "null_resource" "delay_after_storage_account" {
+  provisioner "local-exec" {
+    command = "sleep 60"
+  }
+
+  depends_on = [azurerm_storage_account.main]
+}
