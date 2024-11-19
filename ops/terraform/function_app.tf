@@ -1,24 +1,3 @@
-resource "azurerm_resource_group" "main" {
-  name     = var.resource_group_name
-  location = var.location
-}
-
-resource "azurerm_storage_account" "main" {
-  name                     = var.storage_account_name
-  resource_group_name      = azurerm_resource_group.main.name
-  location                 = var.location
-  account_tier             = var.account_tier
-  account_replication_type = var.account_replication_type
-}
-
-resource "azurerm_service_plan" "main" {
-  name                = var.service_plan_name
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  os_type             = var.os_type
-  sku_name            = var.function_app_sku_size
-}
-
 resource "azurerm_linux_function_app" "main" {
   name                       = "${local.resource_prefix}-realtime-processing-service"
   resource_group_name        = azurerm_resource_group.main.name
@@ -28,8 +7,8 @@ resource "azurerm_linux_function_app" "main" {
   storage_account_access_key = azurerm_storage_account.main.primary_access_key
   tags                       = local.default_tags
 
-  https_only                  = true
-  functions_extension_version = "~4"
+  https_only                  = var.https_only
+  functions_extension_version = var.functions_extension_version
 
   site_config {
     http2_enabled       = var.http2_enabled
