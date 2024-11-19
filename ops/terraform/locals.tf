@@ -1,9 +1,5 @@
 # locals.tf
 locals {
-  default_tags = {
-    environment = "dev"
-    project     = "realtime-processing"
-    owner       = "Ops-team"
-    resource_prefix = "myproject"
-  }
+  resource_prefix = var.resource_prefix
+  default_tags = var.default_tags
 }

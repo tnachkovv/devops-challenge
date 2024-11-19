@@ -1,5 +1,3 @@
-# terraform.tfvars
-
 resource_prefix = "myapp"
 
 location = "East US"
@@ -9,7 +7,9 @@ default_tags = {
   department  = "IT"
 }
 
-function_app_name = "${var.resource_prefix}-realtime-processing-service"
-
-function_app_sku_size = "S1"
-function_app_sku_tier = "Standard"
+resource_group_name   = "myapp-rg"
+storage_account_name  = "myappstorageacct"
+service_plan_name     = "myapp-service-plan"
+function_app_name     = "myapp-realtime-processing-service"
+function_app_sku_size = "Y1"
+functions_extension_version = "~4"
