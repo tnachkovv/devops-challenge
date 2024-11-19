@@ -83,10 +83,16 @@ variable "minimum_tls_version" {
 variable "node_version" {
   description = "Node.js version"
   type        = string
-  default     = "18"
+  default     = "20"
 }
 variable "os_type" {
   description = "Os type of the Runner"
   type        = string
   default     = "Linux"
+}
+
+variable "sku_name" {
+  description = "Name of the SKU"
+  type        = string
+  default     = "Y1"
 }
